@@ -1,9 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+} from '@nestjs/common';
 import { LiquorService } from './liquor.service';
 import { CreateLiquorDto } from './dto/create-liquor.dto';
 import { UpdateLiquorDto } from './dto/update-liquor.dto';
 
-@Controller('liquor')
+@Controller('liquors')
 export class LiquorController {
   constructor(private readonly liquorService: LiquorService) {}
 
@@ -12,23 +21,18 @@ export class LiquorController {
     return this.liquorService.create(createLiquorDto);
   }
 
-  @Get()
-  findAll() {
-    return this.liquorService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.liquorService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.liquorService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLiquorDto: UpdateLiquorDto) {
-    return this.liquorService.update(+id, updateLiquorDto);
+  @Put(':id')
+  update(@Param('id') id: number, @Body() updateLiquorDto: UpdateLiquorDto) {
+    return this.liquorService.update(id, updateLiquorDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.liquorService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.liquorService.remove(id);
   }
 }
