@@ -1,38 +1,36 @@
 /* eslint-disable prettier/prettier */
-import {
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Param,
-  Body,
-} from '@nestjs/common';
+import { Controller } from '@nestjs/common';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { LiquorService } from './liquor.service';
 import { CreateLiquorDto } from './dto/create-liquor.dto';
 import { UpdateLiquorDto } from './dto/update-liquor.dto';
 
-@Controller('liquors')
+@Controller()
 export class LiquorController {
   constructor(private readonly liquorService: LiquorService) {}
 
-  @Post()
-  create(@Body() createLiquorDto: CreateLiquorDto) {
+  @MessagePattern({ cmd: 'create_liquor' })
+  async create(@Payload() createLiquorDto: CreateLiquorDto) {
     return this.liquorService.create(createLiquorDto);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.liquorService.findOne(id);
+  @MessagePattern({ cmd: 'find_one_liquor' })
+  async findOne(@Payload() payload: { id: string }) {
+    return this.liquorService.findOne(+payload.id);
   }
 
-  @Put(':id')
-  update(@Param('id') id: number, @Body() updateLiquorDto: UpdateLiquorDto) {
-    return this.liquorService.update(id, updateLiquorDto);
+  @MessagePattern({ cmd: 'find_all_liquors' })
+  async findAll() {
+    return this.liquorService.findAll();
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: number) {
-    return this.liquorService.remove(id);
+  @MessagePattern({ cmd: 'update_liquor' })
+  async update(@Payload() payload: { id: string; data: UpdateLiquorDto }) {
+    return this.liquorService.update(+payload.id, payload.data);
+  }
+
+  @MessagePattern({ cmd: 'delete_liquor' })
+  async remove(@Payload() payload: { id: string }) {
+    return this.liquorService.remove(+payload.id);
   }
 }
