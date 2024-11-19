@@ -20,8 +20,8 @@ LIQUOR_DB_PORT="ejemplo"
 LIQUOR_DB_USER="ejemplo"
 LIQUOR_DB_PASSWORD="ejemplo"
 LIQUOR_DB_NAME="ejemplo"
-NATS_SERVER_URL="ejemplo"
-PORT="ejemplo"
+NATS_SERVER_URL="nats://localhost:4222"
+PORT=3002
 ```
 
 ## Instalacion
@@ -49,4 +49,4 @@ npm test
 ## Swagger UI (Opcional)
 
 Si este microservicio incluye documentación con Swagger, puedes acceder a la interfaz de Swagger en:
-http://localhost:<PUERTO>/api-docs
+http://localhost:3002/api/docs
