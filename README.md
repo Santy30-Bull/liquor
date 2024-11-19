@@ -40,14 +40,3 @@ docker run -d --name nats -p 4222:4222 nats
 npm start
 
 ```
-
-## Pruebas
-
-```bash
-npm test
-```
-
-## Swagger UI (Opcional)
-
-Si este microservicio incluye documentación con Swagger, puedes acceder a la interfaz de Swagger en:
-http://localhost:3002/api/docs
