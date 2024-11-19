@@ -26,8 +26,8 @@ PORT="ejemplo"
 
 ## Instalacion
 
-git clone <URL_DEL_REPOSITORIO>
-cd <NOMBRE_DEL_REPOSITORIO>
+git clone https://github.com/Santy30-Bull/liquor.git
+cd liquour
 
 ```bash
 npm install
